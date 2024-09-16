@@ -50,11 +50,16 @@ A modern music streaming application built using Flutter.
 
 ### Folder Structure
 
-lib/ ├── models/ # Data models (Song, User) ├── services/ # Logic for audio player and other
-services ├── ui/ # All UI-related files │ ├── home/ # Home screen and related widgets │ ├──
-discovery/ # Discovery tab and song listings │ ├── account/ # Account tab with user information │
-├── settings/ # Settings tab with app preferences │ ├── widgets/ # Reusable widgets (ProgressBar,
-MediaControlButtons) ├── main.dart # Main entry point of the app
+lib/ 
+├── models/ # Data models (Song, User) 
+├── services/ # Logic for audio player and other services 
+├── ui/ # All UI-related files 
+│ ├── home/ # Home screen and related widgets 
+│ ├── discovery/ # Discovery tab and song listings 
+│ ├── account/ # Account tab with user information 
+│ ├── settings/ # Settings tab with app preferences 
+│ ├── widgets/ # Reusable widgets (ProgressBar, MediaControlButtons) 
+├── main.dart # Main entry point of the app
 
 
 ### Key Components
