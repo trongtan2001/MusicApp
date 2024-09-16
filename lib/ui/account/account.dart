@@ -1,7 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:music_app/ui/auth/login.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/model/user.dart';
 import '../../plugin/ThemeProvider.dart';
@@ -30,7 +30,9 @@ class AccountTab extends StatelessWidget {
               return _buildLoggedOutView(context, themeProvider);
             } else {
               final user = snapshot.data!;
-              return _buildLoggedInView(user, themeProvider, context);
+              return SingleChildScrollView(
+                child: _buildLoggedInView(user, themeProvider, context),
+              );
             }
           },
         ),
@@ -230,11 +232,9 @@ class AccountTab extends StatelessWidget {
   }
 
   void _logout(BuildContext context) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('user');
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const LoginPage()),
-    );
+    await UserPreferences.clearUser();
+    Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) {
+      return LoginPage();
+    }));
   }
 }

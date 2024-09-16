@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:music_app/ui/auth/login.dart';
 import 'package:music_app/ui/discovery/discovery.dart';
 import 'package:music_app/ui/home/viewmodel.dart';
 import 'package:music_app/ui/now_playing/audio_player_manager.dart';
@@ -51,6 +52,7 @@ class _MusicHomePageState extends State<MusicHomePage>
     const DiscoveryTab(),
     const AccountTab(),
     const SettingsTab(),
+    const LoginPage(),
   ];
 
   late AnimationController _imageAnimController;

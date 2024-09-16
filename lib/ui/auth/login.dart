@@ -5,7 +5,7 @@ import 'package:music_app/data/model/user.dart';
 import 'package:provider/provider.dart';
 
 import '../../plugin/ThemeProvider.dart';
-import '../account/account.dart';
+import '../home/home.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -72,27 +72,43 @@ class LoginPage extends StatelessWidget {
                       const SizedBox(height: 32),
                       TextField(
                         controller: emailController,
+                        obscureText: true,
                         style: TextStyle(
                           color: themeProvider.isDarkMode
                               ? Colors.white
                               : Colors.black,
                         ),
+                        cursorColor: themeProvider.isDarkMode
+                            ? Colors.white
+                            : Colors.black,
                         decoration: InputDecoration(
-                          labelText: 'Email',
-                          labelStyle: TextStyle(
-                            color: themeProvider.isDarkMode
-                                ? Colors.white70
-                                : Colors.black87,
-                          ),
-                          filled: true,
-                          fillColor: themeProvider.isDarkMode
-                              ? Colors.grey[850]
-                              : Colors.grey[300],
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
+                            labelText: 'Email',
+                            labelStyle: TextStyle(
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            fillColor: themeProvider.isDarkMode
+                                ? Colors.grey[850]
+                                : Colors.grey[300],
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: themeProvider.isDarkMode
+                                    ? Colors.white
+                                    : Colors.black,
+                                width: 2.0,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: themeProvider.isDarkMode
+                                    ? Colors.white
+                                    : Colors.black,
+                                width: 2.0,
+                              ),
+                            )),
                       ),
                       const SizedBox(height: 16),
                       TextField(
@@ -103,45 +119,62 @@ class LoginPage extends StatelessWidget {
                               ? Colors.white
                               : Colors.black,
                         ),
+                        cursorColor: themeProvider.isDarkMode
+                            ? Colors.white
+                            : Colors.black,
                         decoration: InputDecoration(
-                          labelText: 'Mật khẩu',
-                          labelStyle: TextStyle(
-                            color: themeProvider.isDarkMode
-                                ? Colors.white70
-                                : Colors.black87,
-                          ),
-                          filled: true,
-                          fillColor: themeProvider.isDarkMode
-                              ? Colors.grey[850]
-                              : Colors.grey[300],
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
+                            labelText: 'Mật khẩu',
+                            labelStyle: TextStyle(
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            fillColor: themeProvider.isDarkMode
+                                ? Colors.grey[850]
+                                : Colors.grey[300],
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: themeProvider.isDarkMode
+                                    ? Colors.white
+                                    : Colors.black,
+                                width: 2.0,
+                              ),
+                            )),
                       ),
                       const SizedBox(height: 24),
                       ElevatedButton(
-                        onPressed: () async{
+                        onPressed: () async {
                           final email = emailController.text.trim();
                           final password = passwordController.text.trim();
 
                           final user = await UserPreferences.getUser();
-                          if(user != null && user.email == email && user.password == password) {
-                            Navigator.pushReplacement(
+                          if (user != null &&
+                              user.email == email &&
+                              user.password == password) {
+                            Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const AccountTab()),
+                              CupertinoPageRoute(
+                                  builder: (context) => const MusicApp()),
                             );
                           } else {
-                            showDialog(context: context, builder: (context) => AlertDialog(
-                              title: const Text('Error'),
-                              content: const Text('Email hoặc mật khẩu không đúng'),
-                              actions: [
-                                TextButton(onPressed: () {
-                                  Navigator.pop(context);
-                                }, child: const Text('OK'))
-                              ],
-                            ));
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      title: const Text('Lỗi'),
+                                      content: const Text(
+                                          'Email hoặc mật khẩu không đúng'),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('OK'))
+                                      ],
+                                    ));
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -166,25 +199,51 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ForgotPasswordPage()));
-                          },
-                          child: Text(
-                            'Quên mật khẩu?',
-                            style: TextStyle(
-                              color: themeProvider.isDarkMode
-                                  ? Colors.white70
-                                  : Colors.black87,
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const MusicApp()));
+                                },
+                                child: Text(
+                                  '<- Quay lại thư viện',
+                                  style: TextStyle(
+                                    color: themeProvider.isDarkMode
+                                        ? Colors.white70
+                                        : Colors.black87,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                        const ForgotPasswordPage()));
+                              },
+                              child: Text(
+                                'Quên mật khẩu?',
+                                style: TextStyle(
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.white70
+                                      : Colors.black87,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 32),
                       Align(
@@ -380,22 +439,31 @@ class SignUpPage extends StatelessWidget {
                     color:
                         themeProvider.isDarkMode ? Colors.white : Colors.black,
                   ),
+                  cursorColor:
+                      themeProvider.isDarkMode ? Colors.white : Colors.black,
                   decoration: InputDecoration(
-                    labelText: 'Tên đầy đủ',
-                    labelStyle: TextStyle(
-                      color: themeProvider.isDarkMode
-                          ? Colors.white70
-                          : Colors.black87,
-                    ),
-                    filled: true,
-                    fillColor: themeProvider.isDarkMode
-                        ? Colors.grey[850]
-                        : Colors.grey[300],
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
+                      labelText: 'Tên đầy đủ',
+                      labelStyle: TextStyle(
+                        color: themeProvider.isDarkMode
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                      fillColor: themeProvider.isDarkMode
+                          ? Colors.grey[850]
+                          : Colors.grey[300],
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: themeProvider.isDarkMode
+                              ? Colors.white
+                              : Colors.black,
+                          width: 2.0,
+                        ),
+                      )),
                 ),
                 const SizedBox(height: 16),
                 TextField(
@@ -404,22 +472,30 @@ class SignUpPage extends StatelessWidget {
                     color:
                         themeProvider.isDarkMode ? Colors.white : Colors.black,
                   ),
+                  cursorColor:
+                      themeProvider.isDarkMode ? Colors.white : Colors.black,
                   decoration: InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: TextStyle(
-                      color: themeProvider.isDarkMode
-                          ? Colors.white70
-                          : Colors.black87,
-                    ),
-                    filled: true,
-                    fillColor: themeProvider.isDarkMode
-                        ? Colors.grey[850]
-                        : Colors.grey[300],
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
+                      labelText: 'Email',
+                      labelStyle: TextStyle(
+                        color: themeProvider.isDarkMode
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                      fillColor: themeProvider.isDarkMode
+                          ? Colors.grey[850]
+                          : Colors.grey[300],
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: themeProvider.isDarkMode
+                              ? Colors.white
+                              : Colors.black,
+                          width: 2.0,
+                        ),
+                      )),
                 ),
                 const SizedBox(height: 16),
                 TextField(
@@ -429,22 +505,30 @@ class SignUpPage extends StatelessWidget {
                     color:
                         themeProvider.isDarkMode ? Colors.white : Colors.black,
                   ),
+                  cursorColor:
+                      themeProvider.isDarkMode ? Colors.white : Colors.black,
                   decoration: InputDecoration(
-                    labelText: 'Mật khẩu',
-                    labelStyle: TextStyle(
-                      color: themeProvider.isDarkMode
-                          ? Colors.white70
-                          : Colors.black87,
-                    ),
-                    filled: true,
-                    fillColor: themeProvider.isDarkMode
-                        ? Colors.grey[850]
-                        : Colors.grey[300],
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
+                      labelText: 'Mật khẩu',
+                      labelStyle: TextStyle(
+                        color: themeProvider.isDarkMode
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                      fillColor: themeProvider.isDarkMode
+                          ? Colors.grey[850]
+                          : Colors.grey[300],
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: themeProvider.isDarkMode
+                              ? Colors.white
+                              : Colors.black,
+                          width: 2.0,
+                        ),
+                      )),
                 ),
                 const SizedBox(height: 16),
                 TextField(
@@ -454,22 +538,30 @@ class SignUpPage extends StatelessWidget {
                     color:
                         themeProvider.isDarkMode ? Colors.white : Colors.black,
                   ),
+                  cursorColor:
+                      themeProvider.isDarkMode ? Colors.white : Colors.black,
                   decoration: InputDecoration(
-                    labelText: 'Xác nhận mật khẩu',
-                    labelStyle: TextStyle(
-                      color: themeProvider.isDarkMode
-                          ? Colors.white70
-                          : Colors.black87,
-                    ),
-                    filled: true,
-                    fillColor: themeProvider.isDarkMode
-                        ? Colors.grey[850]
-                        : Colors.grey[300],
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
+                      labelText: 'Xác nhận mật khẩu',
+                      labelStyle: TextStyle(
+                        color: themeProvider.isDarkMode
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                      fillColor: themeProvider.isDarkMode
+                          ? Colors.grey[850]
+                          : Colors.grey[300],
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: themeProvider.isDarkMode
+                              ? Colors.white
+                              : Colors.black,
+                          width: 2.0,
+                        ),
+                      )),
                 ),
                 const SizedBox(height: 24),
                 ElevatedButton(
@@ -489,14 +581,22 @@ class SignUpPage extends StatelessWidget {
                           password: password);
 
                       await UserPreferences.saveUser(user);
-                      print(user);
                       Navigator.pop(context);
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Mật khẩu không khớp')),
-                      );
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                title: const Text('Chú ý'),
+                                content: const Text('Mật khẩu không khớp'),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('OK'))
+                                ],
+                              ));
                     }
-
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
