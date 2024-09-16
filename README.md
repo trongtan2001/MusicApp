@@ -48,7 +48,25 @@ A modern music streaming application built using Flutter.
     flutter run
     ```
 
+### Building the APK
+
+#### 1. Build APK Release
+
+To build the release APK:
+
+1. Run the following command in the terminal:
+
+   ```bash
+   flutter build apk --release
+   ```
+2. The APK file will be generated at the path:
+   
+   ```
+   build/app/outputs/flutter-apk/app-release.apk
+   ```
+
 ### Folder Structure
+
 ```
 lib/ 
 ├── models/ # Data models (Song, User) 
@@ -64,32 +82,42 @@ lib/
 
 ### Key Components
 
-1. **`AudioPlayerManager`:** Handles the audio playback, including play, pause, next, and previous functionalities using `just_audio` and `rxdart` packages.
-2. **`HomeTabPage`:** Displays a list of songs and includes the search functionality to filter songs based on user input.
-3. **`NowPlayingPage`:** Shows detailed information about the currently playing song with a rotating album cover, play/pause button, and seek bar.
-4. **`CupertinoTabScaffold`:** Provides the tab-based navigation for Home, Discovery, Account, and Settings.
+1. **`AudioPlayerManager`:** Handles the audio playback, including play, pause, next, and previous
+   functionalities using `just_audio` and `rxdart` packages.
+2. **`HomeTabPage`:** Displays a list of songs and includes the search functionality to filter songs
+   based on user input.
+3. **`NowPlayingPage`:** Shows detailed information about the currently playing song with a rotating
+   album cover, play/pause button, and seek bar.
+4. **`CupertinoTabScaffold`:** Provides the tab-based navigation for Home, Discovery, Account, and
+   Settings.
 5. **`LoginPage`:** Allows users to login or sign up with an authentication system
 6. **`AccountTab`:** Displays user profile information and recent activities.
 
 ### Dark Mode Support
 
-The app supports dark and light themes by integrating the `Provider` package to handle theme switching dynamically.
+The app supports dark and light themes by integrating the `Provider` package to handle theme
+switching dynamically.
 
 ### Search Functionality
 
-The search bar appears when tapping the search icon on the Home screen. It filters songs by their title and displays the results in real-time.
+The search bar appears when tapping the search icon on the Home screen. It filters songs by their
+title and displays the results in real-time.
 
 ### Mini Player
 
-The mini player appears at the bottom of the screen when a song is playing. It shows the song's cover, title, and controls for pause/play.
+The mini player appears at the bottom of the screen when a song is playing. It shows the song's
+cover, title, and controls for pause/play.
 
 ### User Preferences Storage
 
-The app uses shared_preferences to store user data locally on the device. This includes login information, favorite songs, and theme preferences. User data is retrieved and stored in a secure and efficient manner.
+The app uses shared_preferences to store user data locally on the device. This includes login
+information, favorite songs, and theme preferences. User data is retrieved and stored in a secure
+and efficient manner.
 
 ### Offline Mode
 
-Downloaded songs can be played without an internet connection. The app provides an easy-to-use interface for managing offline music.
+Downloaded songs can be played without an internet connection. The app provides an easy-to-use
+interface for managing offline music.
 
 ## Packages Used
 
@@ -102,13 +130,15 @@ Downloaded songs can be played without an internet connection. The app provides 
 
 ## Performance Optimization
 
-- `Caching`: Song details and preferences are cached locally to provide faster loading times. 
+- `Caching`: Song details and preferences are cached locally to provide faster loading times.
 - `Memory Management`: Proper disposal of streams and controllers to optimize memory usage.
 
 ## Known Issues & Troubleshooting
 
-- `Song Playback Delay`: There may be a slight delay in song playback due to network latency. Ensure a stable internet connection for optimal performance.
-- `Dark Mode Not Saving`: If the app does not remember the selected theme, ensure that shared_preferences is correctly set up in your project.
+- `Song Playback Delay`: There may be a slight delay in song playback due to network latency. Ensure
+  a stable internet connection for optimal performance.
+- `Dark Mode Not Saving`: If the app does not remember the selected theme, ensure that
+  shared_preferences is correctly set up in your project.
 
 ## How to Contribute
 
