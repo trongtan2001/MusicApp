@@ -49,7 +49,7 @@ A modern music streaming application built using Flutter.
     ```
 
 ### Folder Structure
-
+```
 lib/ 
 ├── models/ # Data models (Song, User) 
 ├── services/ # Logic for audio player and other services 
@@ -60,7 +60,7 @@ lib/
 │ ├── settings/ # Settings tab with app preferences 
 │ ├── widgets/ # Reusable widgets (ProgressBar, MediaControlButtons) 
 ├── main.dart # Main entry point of the app
-
+```
 
 ### Key Components
 
