@@ -13,6 +13,7 @@ A modern music streaming application built using Flutter.
 - Download songs for offline playback
 - Add favorite songs to your library
 - Support for repeat and shuffle playback modes
+- Login and user authentication with user profile management
 - Responsive UI with Cupertino design for iOS users
 
 ## Getting Started
@@ -28,7 +29,7 @@ A modern music streaming application built using Flutter.
 
 1. Clone this repository:
     ```bash
-    git clone https://github.com/your_username/music_app.git
+    git clone https://github.com/trongtan2001/MusicApp.git
     ```
 2. Navigate to the project directory:
     ```bash
@@ -62,6 +63,8 @@ MediaControlButtons) ├── main.dart # Main entry point of the app
 2. **`HomeTabPage`:** Displays a list of songs and includes the search functionality to filter songs based on user input.
 3. **`NowPlayingPage`:** Shows detailed information about the currently playing song with a rotating album cover, play/pause button, and seek bar.
 4. **`CupertinoTabScaffold`:** Provides the tab-based navigation for Home, Discovery, Account, and Settings.
+5. **`LoginPage`:** Allows users to login or sign up with an authentication system
+6. **`AccountTab`:** Displays user profile information and recent activities.
 
 ### Dark Mode Support
 
@@ -75,13 +78,32 @@ The search bar appears when tapping the search icon on the Home screen. It filte
 
 The mini player appears at the bottom of the screen when a song is playing. It shows the song's cover, title, and controls for pause/play.
 
+### User Preferences Storage
+
+The app uses shared_preferences to store user data locally on the device. This includes login information, favorite songs, and theme preferences. User data is retrieved and stored in a secure and efficient manner.
+
+### Offline Mode
+
+Downloaded songs can be played without an internet connection. The app provides an easy-to-use interface for managing offline music.
+
 ## Packages Used
 
 - `just_audio`: Audio playback support.
 - `rxdart`: For handling reactive streams.
 - `provider`: State management for theme control and song state.
+- `shared_preferences`: Persistent storage for user data and preferences.
 - `cupertino_icons`: iOS-styled icons.
 - `share`: Share functionality for sharing songs via social media.
+
+## Performance Optimization
+
+- `Caching`: Song details and preferences are cached locally to provide faster loading times. 
+- `Memory Management`: Proper disposal of streams and controllers to optimize memory usage.
+
+## Known Issues & Troubleshooting
+
+- `Song Playback Delay`: There may be a slight delay in song playback due to network latency. Ensure a stable internet connection for optimal performance.
+- `Dark Mode Not Saving`: If the app does not remember the selected theme, ensure that shared_preferences is correctly set up in your project.
 
 ## How to Contribute
 
