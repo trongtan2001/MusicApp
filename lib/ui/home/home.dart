@@ -11,6 +11,7 @@ import 'package:music_app/ui/account/account.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../data/helper/download_song.dart';
 import '../../data/model/song.dart';
 import '../../plugin/ThemeProvider.dart';
 import '../now_playing/playing.dart';
@@ -493,7 +494,52 @@ class _HomeTabPageState extends State<HomeTabPage> {
                                   color: themeProvider.isDarkMode
                                       ? Colors.white
                                       : Colors.black)),
-                          onTap: () {},
+                          onTap: () async {
+                            String? filePath =
+                                await DownloadSongHelper.downloadSong(
+                                song.source, song.title);
+                            if (filePath != null) {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title:
+                                      const Text('Tải xuống thành công'),
+                                      content:
+                                      Text('Đã tải xuống: $filePath'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pop();
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  });
+
+                            } else {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: const Text('Lỗi'),
+                                      content:
+                                      const Text('Lỗi khi tải bài hát xuống'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pop();
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            }
+                          },
                         ),
                         ListTile(
                           leading: Icon(

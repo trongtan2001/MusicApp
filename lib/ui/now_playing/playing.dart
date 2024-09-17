@@ -4,6 +4,7 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:music_app/data/helper/download_song.dart';
 import 'package:music_app/ui/now_playing/audio_player_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -87,7 +88,7 @@ class _NowPlayingPageState extends State<NowPlayingPage>
           builder: (context) {
             return ClipRRect(
                 borderRadius:
-                const BorderRadius.vertical(top: Radius.circular(16)),
+                    const BorderRadius.vertical(top: Radius.circular(16)),
                 child: Container(
                   height: 400,
                   color: themeProvider.isDarkMode ? gray11 : Colors.white,
@@ -145,163 +146,208 @@ class _NowPlayingPageState extends State<NowPlayingPage>
                       const Divider(),
                       Expanded(
                           child: ListView(
-                            children: [
-                              ListTile(
-                                leading: Icon(
-                                  Icons.download_outlined,
-                                  color: themeProvider.isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                                title: Text('Tải xuống',
-                                    style: TextStyle(
-                                        color: themeProvider.isDarkMode
-                                            ? Colors.white
-                                            : Colors.black)),
-                                onTap: () {},
-                              ),
-                              ListTile(
-                                leading: Icon(
-                                  Icons.heart_broken,
-                                  color: themeProvider.isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                                title: Text('Thêm vào thư viện',
-                                    style: TextStyle(
-                                        color: themeProvider.isDarkMode
-                                            ? Colors.white
-                                            : Colors.black)),
-                                onTap: () {},
-                              ),
-                              ListTile(
-                                leading: Icon(
-                                  Icons.music_note_outlined,
-                                  color: themeProvider.isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                                title: Text('Thêm vào playlist',
-                                    style: TextStyle(
-                                        color: themeProvider.isDarkMode
-                                            ? Colors.white
-                                            : Colors.black)),
-                                onTap: () {},
-                              ),
-                              ListTile(
-                                leading: Icon(
-                                  Icons.playlist_play,
-                                  color: themeProvider.isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                                title: Text('Phát bài hát và nội dung tương tự',
-                                    style: TextStyle(
-                                        color: themeProvider.isDarkMode
-                                            ? Colors.white
-                                            : Colors.black)),
-                                onTap: () {},
-                              ),
-                              ListTile(
-                                leading: Icon(
-                                  Icons.add_circle_outline,
-                                  color: themeProvider.isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                                title: Text('Thêm vào danh sách phát',
-                                    style: TextStyle(
-                                        color: themeProvider.isDarkMode
-                                            ? Colors.white
-                                            : Colors.black)),
-                                onTap: () {},
-                              ),
-                              ListTile(
-                                leading: Icon(
-                                  Icons.playlist_play_sharp,
-                                  color: themeProvider.isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                                title: Text('Phát kế tiếp',
-                                    style: TextStyle(
-                                        color: themeProvider.isDarkMode
-                                            ? Colors.white
-                                            : Colors.black)),
-                                onTap: () {},
-                              ),
-                              ListTile(
-                                leading: Icon(
-                                  Icons.library_music_outlined,
-                                  color: themeProvider.isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                                title: Text('Đặt làm nhạc chờ zalo',
-                                    style: TextStyle(
-                                        color: themeProvider.isDarkMode
-                                            ? Colors.white
-                                            : Colors.black)),
-                                onTap: () {},
-                              ),
-                              ListTile(
-                                leading: Icon(
-                                  Icons.music_video_outlined,
-                                  color: themeProvider.isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                                title: Text('Xem album',
-                                    style: TextStyle(
-                                        color: themeProvider.isDarkMode
-                                            ? Colors.white
-                                            : Colors.black)),
-                                onTap: () {},
-                              ),
-                              ListTile(
-                                leading: Icon(
-                                  Icons.personal_injury_outlined,
-                                  color: themeProvider.isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                                title: Text('Xem nghệ sĩ',
-                                    style: TextStyle(
-                                        color: themeProvider.isDarkMode
-                                            ? Colors.white
-                                            : Colors.black)),
-                                onTap: () {},
-                              ),
-                              ListTile(
-                                leading: Icon(
-                                  Icons.block,
-                                  color: themeProvider.isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                                title: Text('Chặn',
-                                    style: TextStyle(
-                                        color: themeProvider.isDarkMode
-                                            ? Colors.white
-                                            : Colors.black)),
-                                onTap: () {},
-                              ),
-                              ListTile(
-                                leading: Icon(
-                                  Icons.report_gmailerrorred,
-                                  color: themeProvider.isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                                title: Text('Báo lỗi',
-                                    style: TextStyle(
-                                        color: themeProvider.isDarkMode
-                                            ? Colors.white
-                                            : Colors.black)),
-                                onTap: () {},
-                              ),
-                            ],
-                          ))
+                        children: [
+                          ListTile(
+                            leading: Icon(
+                              Icons.download_outlined,
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            title: Text('Tải xuống',
+                                style: TextStyle(
+                                    color: themeProvider.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black)),
+                            onTap: () async {
+                              String? filePath =
+                                  await DownloadSongHelper.downloadSong(
+                                      song.source, song.title);
+                              if (filePath != null) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title:
+                                            const Text('Tải xuống thành công'),
+                                        content:
+                                            Text('Đã tải xuống: $filePath'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context)
+                                                  .pop();
+                                            },
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      );
+                                    });
+
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: const Text('Lỗi'),
+                                        content:
+                                            const Text('Lỗi khi tải bài hát xuống'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context)
+                                                  .pop();
+                                            },
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              }
+                            },
+                          ),
+                          ListTile(
+                            leading: Icon(
+                              Icons.heart_broken,
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            title: Text('Thêm vào thư viện',
+                                style: TextStyle(
+                                    color: themeProvider.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black)),
+                            onTap: () {},
+                          ),
+                          ListTile(
+                            leading: Icon(
+                              Icons.music_note_outlined,
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            title: Text('Thêm vào playlist',
+                                style: TextStyle(
+                                    color: themeProvider.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black)),
+                            onTap: () {},
+                          ),
+                          ListTile(
+                            leading: Icon(
+                              Icons.playlist_play,
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            title: Text('Phát bài hát và nội dung tương tự',
+                                style: TextStyle(
+                                    color: themeProvider.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black)),
+                            onTap: () {},
+                          ),
+                          ListTile(
+                            leading: Icon(
+                              Icons.add_circle_outline,
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            title: Text('Thêm vào danh sách phát',
+                                style: TextStyle(
+                                    color: themeProvider.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black)),
+                            onTap: () {},
+                          ),
+                          ListTile(
+                            leading: Icon(
+                              Icons.playlist_play_sharp,
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            title: Text('Phát kế tiếp',
+                                style: TextStyle(
+                                    color: themeProvider.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black)),
+                            onTap: () {},
+                          ),
+                          ListTile(
+                            leading: Icon(
+                              Icons.library_music_outlined,
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            title: Text('Đặt làm nhạc chờ zalo',
+                                style: TextStyle(
+                                    color: themeProvider.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black)),
+                            onTap: () {},
+                          ),
+                          ListTile(
+                            leading: Icon(
+                              Icons.music_video_outlined,
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            title: Text('Xem album',
+                                style: TextStyle(
+                                    color: themeProvider.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black)),
+                            onTap: () {},
+                          ),
+                          ListTile(
+                            leading: Icon(
+                              Icons.personal_injury_outlined,
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            title: Text('Xem nghệ sĩ',
+                                style: TextStyle(
+                                    color: themeProvider.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black)),
+                            onTap: () {},
+                          ),
+                          ListTile(
+                            leading: Icon(
+                              Icons.block,
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            title: Text('Chặn',
+                                style: TextStyle(
+                                    color: themeProvider.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black)),
+                            onTap: () {},
+                          ),
+                          ListTile(
+                            leading: Icon(
+                              Icons.report_gmailerrorred,
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            title: Text('Báo lỗi',
+                                style: TextStyle(
+                                    color: themeProvider.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black)),
+                            onTap: () {},
+                          ),
+                        ],
+                      ))
                     ],
                   ),
                 ));
