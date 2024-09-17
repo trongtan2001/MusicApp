@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:music_app/ui/now_playing/audio_player_manager.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../data/model/song.dart';
 import '../../plugin/ThemeProvider.dart';
@@ -77,13 +78,245 @@ class _NowPlayingPageState extends State<NowPlayingPage>
     const delta = 64;
     final radius = (screenWidth - delta) / 2;
 
+    Color gray11 = const Color(0xFF1C1C1C);
+
+    void showBottomSheet(Song song) {
+      final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+      showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return ClipRRect(
+                borderRadius:
+                const BorderRadius.vertical(top: Radius.circular(16)),
+                child: Container(
+                  height: 400,
+                  color: themeProvider.isDarkMode ? gray11 : Colors.white,
+                  child: Column(
+                    children: <Widget>[
+                      ListTile(
+                        contentPadding: const EdgeInsets.only(
+                          left: 24,
+                          right: 8,
+                        ),
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: FadeInImage.assetNetwork(
+                            placeholder: 'assets/image1.jpg',
+                            image: song.image,
+                            width: 48,
+                            height: 48,
+                            imageErrorBuilder: (context, error, stackTrace) {
+                              return Image.asset(
+                                'assets/image1.jpg',
+                                width: 48,
+                                height: 48,
+                              );
+                            },
+                          ),
+                        ),
+                        title: Text(
+                          song.title,
+                          style: TextStyle(
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black),
+                        ),
+                        subtitle: Text(
+                          song.artist,
+                          style: TextStyle(
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black),
+                        ),
+                        trailing: IconButton(
+                            onPressed: () {
+                              Share.share(
+                                'Check out this song!',
+                              );
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(
+                              Icons.share_outlined,
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            )),
+                      ),
+                      const Divider(),
+                      Expanded(
+                          child: ListView(
+                            children: [
+                              ListTile(
+                                leading: Icon(
+                                  Icons.download_outlined,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                                title: Text('Tải xuống',
+                                    style: TextStyle(
+                                        color: themeProvider.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black)),
+                                onTap: () {},
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.heart_broken,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                                title: Text('Thêm vào thư viện',
+                                    style: TextStyle(
+                                        color: themeProvider.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black)),
+                                onTap: () {},
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.music_note_outlined,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                                title: Text('Thêm vào playlist',
+                                    style: TextStyle(
+                                        color: themeProvider.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black)),
+                                onTap: () {},
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.playlist_play,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                                title: Text('Phát bài hát và nội dung tương tự',
+                                    style: TextStyle(
+                                        color: themeProvider.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black)),
+                                onTap: () {},
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.add_circle_outline,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                                title: Text('Thêm vào danh sách phát',
+                                    style: TextStyle(
+                                        color: themeProvider.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black)),
+                                onTap: () {},
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.playlist_play_sharp,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                                title: Text('Phát kế tiếp',
+                                    style: TextStyle(
+                                        color: themeProvider.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black)),
+                                onTap: () {},
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.library_music_outlined,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                                title: Text('Đặt làm nhạc chờ zalo',
+                                    style: TextStyle(
+                                        color: themeProvider.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black)),
+                                onTap: () {},
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.music_video_outlined,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                                title: Text('Xem album',
+                                    style: TextStyle(
+                                        color: themeProvider.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black)),
+                                onTap: () {},
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.personal_injury_outlined,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                                title: Text('Xem nghệ sĩ',
+                                    style: TextStyle(
+                                        color: themeProvider.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black)),
+                                onTap: () {},
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.block,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                                title: Text('Chặn',
+                                    style: TextStyle(
+                                        color: themeProvider.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black)),
+                                onTap: () {},
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.report_gmailerrorred,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                                title: Text('Báo lỗi',
+                                    style: TextStyle(
+                                        color: themeProvider.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black)),
+                                onTap: () {},
+                              ),
+                            ],
+                          ))
+                    ],
+                  ),
+                ));
+          });
+    }
+
     return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
           middle: const Text(
             'Now Playing',
           ),
           trailing: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showBottomSheet(_song);
+            },
             icon: const Icon(Icons.more_horiz, color: Colors.black),
           ),
           leading: CupertinoNavigationBarBackButton(
@@ -93,19 +326,28 @@ class _NowPlayingPageState extends State<NowPlayingPage>
           ),
         ),
         child: Scaffold(
-          backgroundColor: themeProvider.isDarkMode ? Colors.black : Colors.white,
+          backgroundColor:
+              themeProvider.isDarkMode ? Colors.black : Colors.white,
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   _song.album,
-                  style: TextStyle(color: themeProvider.isDarkMode ? Colors.white : Colors.black, fontSize: 17.0),
+                  style: TextStyle(
+                      color: themeProvider.isDarkMode
+                          ? Colors.white
+                          : Colors.black,
+                      fontSize: 17.0),
                 ),
                 const SizedBox(
                   height: 16,
                 ),
-                Text('_ ___ _', style: TextStyle(color: themeProvider.isDarkMode ? Colors.white : Colors.black)),
+                Text('_ ___ _',
+                    style: TextStyle(
+                        color: themeProvider.isDarkMode
+                            ? Colors.white
+                            : Colors.black)),
                 const SizedBox(
                   height: 48,
                 ),
@@ -136,9 +378,16 @@ class _NowPlayingPageState extends State<NowPlayingPage>
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Share.share(
+                              'Check out this song!',
+                            );
+                            // Navigator.pop(context);
+                          },
                           icon: Icon(Icons.share_outlined,
-                              color: themeProvider.isDarkMode ? Colors.white : Colors.black),
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black),
                           color: Theme.of(context).colorScheme.primary,
                         ),
                         Column(
@@ -146,7 +395,10 @@ class _NowPlayingPageState extends State<NowPlayingPage>
                             Text(
                               _song.title,
                               style: TextStyle(
-                                  color: themeProvider.isDarkMode ? Colors.white : Colors.black, fontSize: 17.0),
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                  fontSize: 17.0),
                             ),
                             const SizedBox(
                               height: 8,
@@ -154,7 +406,9 @@ class _NowPlayingPageState extends State<NowPlayingPage>
                             Text(
                               _song.artist,
                               style: TextStyle(
-                                  color: themeProvider.isDarkMode ? Colors.white : Colors.black,
+                                  color: themeProvider.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
                                   fontStyle: FontStyle.italic),
                             )
                           ],
@@ -162,7 +416,9 @@ class _NowPlayingPageState extends State<NowPlayingPage>
                         IconButton(
                           onPressed: () {},
                           icon: Icon(Icons.favorite_outline,
-                              color: themeProvider.isDarkMode ? Colors.white : Colors.black),
+                              color: themeProvider.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black),
                           color: Theme.of(context).colorScheme.primary,
                         )
                       ],
@@ -242,7 +498,8 @@ class _NowPlayingPageState extends State<NowPlayingPage>
             barHeight: 5.0,
             barCapShape: BarCapShape.round,
             baseBarColor: Colors.grey.withOpacity(0.3),
-            progressBarColor: themeProvider.isDarkMode ? Colors.white : Colors.black,
+            progressBarColor:
+                themeProvider.isDarkMode ? Colors.white : Colors.black,
             bufferedBarColor: Colors.grey.withOpacity(0.3),
             thumbColor: themeProvider.isDarkMode ? Colors.white : Colors.black,
             thumbGlowColor: Colors.green.withOpacity(0.3),

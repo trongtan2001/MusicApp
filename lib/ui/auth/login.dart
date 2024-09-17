@@ -179,8 +179,8 @@ class LoginPage extends StatelessWidget {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: themeProvider.isDarkMode
-                              ? Colors.blueAccent
-                              : Colors.blue,
+                              ? Colors.white
+                              : Colors.black,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -192,7 +192,7 @@ class LoginPage extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 18,
                               color: themeProvider.isDarkMode
-                                  ? Colors.white
+                                  ? Colors.black
                                   : Colors.white,
                             ),
                           ),
@@ -253,7 +253,7 @@ class LoginPage extends StatelessWidget {
                             Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                builder: (context) => SignUpPage(),
+                                builder: (context) => const SignUpPage(),
                               ),
                             );
                           },
@@ -453,7 +453,7 @@ class SignUpPage extends StatelessWidget {
                           : Colors.grey[300],
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(),
+                        borderSide: const BorderSide(),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),

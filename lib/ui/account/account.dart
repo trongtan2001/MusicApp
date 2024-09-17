@@ -50,16 +50,16 @@ class AccountTab extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 50,
-                backgroundImage: user.image == null
-                    ? NetworkImage(user.image)
-                    : const AssetImage('assets/profile_picture.jpg') as ImageProvider,
+                backgroundImage: user.image.isEmpty
+                    ? const AssetImage('assets/profile_picture.jpg') as ImageProvider
+                    : NetworkImage(user.image),
               ),
               const SizedBox(width: 16),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    user.name ?? 'No Name',
+                    user.name,
                     style: TextStyle(
                         color: themeProvider.isDarkMode ? Colors.white : Colors.black,
                         fontSize: 24,
@@ -67,14 +67,14 @@ class AccountTab extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    user.role ?? 'Member',
+                    user.role,
                     style: TextStyle(
                         color: themeProvider.isDarkMode ? Colors.white70 : Colors.black87,
                         fontSize: 16),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    user.email ?? 'No Email',
+                    user.email,
                     style: TextStyle(
                         color: themeProvider.isDarkMode ? Colors.white70 : Colors.black87,
                         fontSize: 16),
@@ -220,9 +220,9 @@ class AccountTab extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 'Đăng nhập',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: themeProvider.isDarkMode ? Colors.black : Colors.white),
               ),
             ),
           ],
@@ -232,9 +232,10 @@ class AccountTab extends StatelessWidget {
   }
 
   void _logout(BuildContext context) async {
+    final navigator = Navigator.of(context);
     await UserPreferences.clearUser();
-    Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) {
-      return LoginPage();
+    navigator.pushReplacement(CupertinoPageRoute(builder: (context) {
+      return const LoginPage();
     }));
   }
 }
