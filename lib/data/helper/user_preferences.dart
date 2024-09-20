@@ -1,30 +1,20 @@
-import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../model/user.dart';
-
 class UserPreferences {
-  static const String _keyUser = 'user';
+  static const String _keyUserId = 'user_id';
 
-  static Future<void> saveUser(User user) async {
+  static Future<void> saveUserId(int userId) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final userJson = jsonEncode(user.toMap());
-    await prefs.setString(_keyUser, userJson);
+    await prefs.setInt(_keyUserId, userId);
   }
 
-  static Future<User?> getUser() async {
+  static Future<int?> getUserId() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final userString = prefs.getString(_keyUser);
-    if(userString != null) {
-      final userMap = jsonDecode(userString) as Map<String, dynamic>;
-      return User.fromMap(userMap);
-    }
-    return null;
+    return prefs.getInt(_keyUserId);
   }
 
-  static Future<void> clearUser() async {
+  static Future<void> clearUserId() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_keyUser);
+    await prefs.remove(_keyUserId);
   }
 }

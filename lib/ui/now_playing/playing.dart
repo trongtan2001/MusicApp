@@ -208,7 +208,7 @@ class _NowPlayingPageState extends State<NowPlayingPage>
                           ),
                           ListTile(
                             leading: Icon(
-                              Icons.heart_broken,
+                              Icons.favorite_outline,
                               color: themeProvider.isDarkMode
                                   ? Colors.white
                                   : Colors.black,

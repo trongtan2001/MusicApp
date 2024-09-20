@@ -543,7 +543,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                         ),
                         ListTile(
                           leading: Icon(
-                            Icons.heart_broken,
+                            Icons.favorite_outline,
                             color: themeProvider.isDarkMode
                                 ? Colors.white
                                 : Colors.black,

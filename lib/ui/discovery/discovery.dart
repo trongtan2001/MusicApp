@@ -205,7 +205,7 @@ class FeaturedSongTile extends StatelessWidget {
           ),
         ),
         trailing: Icon(
-          Icons.play_arrow,
+          Icons.favorite_outline,
           color: themeProvider.isDarkMode ? Colors.white : Colors.black,
         ),
         onTap: () {

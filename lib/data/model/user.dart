@@ -12,9 +12,10 @@ class User {
       this.image = 'assets/image1.jpg',
       required this.role,
       required this.email,
-      required this.password});
+      required this.password
+  });
 
-  factory User.fromMap(Map<String, dynamic> map) {
+  factory User.fromJson(Map<String, dynamic> map) {
     return User(
         id: map['id'],
         name: map['name'],

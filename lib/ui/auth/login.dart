@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:music_app/data/helper/user_preferences.dart';
 import 'package:provider/provider.dart';
 
 import '../../plugin/ThemeProvider.dart';
@@ -35,6 +36,8 @@ class LoginPage extends StatelessWidget {
           );
 
           if (response.data['success']) {
+            final userId = response.data['user']['id'];
+            await UserPreferences.saveUserId(userId);
             Navigator.push(context,
                 CupertinoPageRoute(builder: (context) => const MusicApp()));
           } else {
@@ -253,7 +256,7 @@ class LoginPage extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                            const MusicApp()));
+                                                const MusicApp()));
                                   },
                                   child: Text(
                                     '<- Quay lại thư viện',
@@ -274,7 +277,7 @@ class LoginPage extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                          const ForgotPasswordPage()));
+                                              const ForgotPasswordPage()));
                                 },
                                 child: Text(
                                   'Quên mật khẩu?',
@@ -324,4 +327,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-

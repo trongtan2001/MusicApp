@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +12,21 @@ class AccountTab extends StatelessWidget {
   const AccountTab({super.key});
 
   Future<User?> _getUser() async {
-    return await UserPreferences.getUser();
+    final userId = await UserPreferences.getUserId();
+    if(userId != null) {
+      try {
+        final response = await Dio().get('http://10.0.2.2:3000/user/$userId');
+        if(response.data['success']) {
+          return User.fromJson(response.data['user']);
+        } else {
+          return null;
+        }
+      } catch (e) {
+        print('Error fetching user details: $e');
+        return null;
+      }
+    }
+    return null;
   }
 
   @override
@@ -233,7 +248,7 @@ class AccountTab extends StatelessWidget {
 
   void _logout(BuildContext context) async {
     final navigator = Navigator.of(context);
-    await UserPreferences.clearUser();
+    await UserPreferences.clearUserId();
     navigator.pushReplacement(CupertinoPageRoute(builder: (context) {
       return const LoginPage();
     }));
