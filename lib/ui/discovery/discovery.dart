@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:music_app/ui/favorite_songs/favorite_songs.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/model/song.dart';
@@ -12,7 +13,6 @@ class DiscoveryTab extends StatefulWidget {
 
   @override
   _DiscoveryTabState createState() => _DiscoveryTabState();
-
 }
 
 class _DiscoveryTabState extends State<DiscoveryTab> {
@@ -64,36 +64,35 @@ class _DiscoveryTabState extends State<DiscoveryTab> {
       backgroundColor: themeProvider.isDarkMode ? Colors.black : Colors.white,
       body: SafeArea(
           child: ListView(
-            padding: const EdgeInsets.all(8.0),
-            children: [
-              // Categories Section
-              const SectionHeader(title: 'Thể loại'),
-              SizedBox(
-                height: 100,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: categories.length,
-                  separatorBuilder: (context, index) => const SizedBox(width: 1),
-                  itemBuilder: (context, index) {
-                    final category = categories[index];
-                    return SizedBox(
-                      width: 100,
-                      child: CategoryCard(
-                        categoryName: category['name']!,
-                        imageUrl: category['image']!,
-                      ),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: 20),
+        padding: const EdgeInsets.all(8.0),
+        children: [
+          // Categories Section
+          const SectionHeader(title: 'Thể loại'),
+          SizedBox(
+            height: 100,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: categories.length,
+              separatorBuilder: (context, index) => const SizedBox(width: 1),
+              itemBuilder: (context, index) {
+                final category = categories[index];
+                return SizedBox(
+                  width: 100,
+                  child: CategoryCard(
+                    categoryName: category['name']!,
+                    imageUrl: category['image']!,
+                  ),
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 20),
 
-              // Featured Songs Section
-              const SectionHeader(title: 'Bài hát nổi bật'),
-              ...songs.map((song) => FeaturedSongTile(song: song)).toList(),
-            ],
-          )
-      ),
+          // Featured Songs Section
+          const SectionHeader(title: 'Bài hát nổi bật'),
+          ...songs.map((song) => FeaturedSongTile(song: song)).toList(),
+        ],
+      )),
     );
   }
 }
@@ -124,7 +123,8 @@ class CategoryCard extends StatelessWidget {
   final String categoryName;
   final String imageUrl;
 
-  const CategoryCard({required this.categoryName, required this.imageUrl, super.key});
+  const CategoryCard(
+      {required this.categoryName, required this.imageUrl, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -134,35 +134,35 @@ class CategoryCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12), // Border radius for the card
       ),
-     child: ClipRRect(
-       borderRadius: BorderRadius.circular(12),
-       child: Stack(
-         children: [
-           // Background image
-           Positioned.fill(
-             child: Image.asset(
-               imageUrl,
-               fit: BoxFit.cover,
-             ),
-           ),
-           // Overlay with text
-           Center(
-             child: Padding(
-               padding: const EdgeInsets.all(16.0),
-               child: Text(
-                 categoryName,
-                 style: const TextStyle(
-                   fontSize: 16,
-                   fontWeight: FontWeight.bold,
-                   color: Colors.black, // Text color
-                 ),
-                 textAlign: TextAlign.center,
-               ),
-             ),
-           ),
-         ],
-       ),
-     ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Stack(
+          children: [
+            // Background image
+            Positioned.fill(
+              child: Image.asset(
+                imageUrl,
+                fit: BoxFit.cover,
+              ),
+            ),
+            // Overlay with text
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  categoryName,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black, // Text color
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -209,7 +209,8 @@ class FeaturedSongTile extends StatelessWidget {
           color: themeProvider.isDarkMode ? Colors.white : Colors.black,
         ),
         onTap: () {
-          // Handle play song
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const FavoriteSongs()));
         },
       ),
     );
